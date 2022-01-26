@@ -1,3 +1,12 @@
+<?php
+
+    
+    $con = mysqli_connect('localhost','root');
+    mysqli_select_db($con,'ecommerce');
+    $sql = "SELECT * FROM productos";
+    $featured = $con->query($sql);
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +29,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">TechBuy.com</a>
+  <a class="navbar-brand" href="#">MAMCORP</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -46,5 +55,33 @@
     </ul>
   </div>
 </nav>
+    
+<div class="col-md-2"></div>
+
+    <div class="col-md-8">
+        <div class="row>"
+            <h2 class="text-center">Lista de productos.</h2> <br> <br>
+            <?php 
+                while($product = mysqli_fetch_assoc($featured)):
+            
+            ?>
+            <div class="col-md-5">
+
+                <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="<?= $product['image'];?>" alt="<?= $product['nombre']; ?>"/>
+                <div class="card-body">
+                <h5 class="card-title"><?= $product['nombre'];?><?= $product['nombre'];?></h5>
+                <p class="card-text">Precio: $ <?= $product['precio'];?></p>
+                <a href="details.php">
+                    <button type="button" class="btn-success" data-toggle="modal" data-target="#details-1">Seleccionar</button>
+                </a>
+                
+  </div>
+</div>
+                
+            </div>
+            <?php endwhile; ?>
+        </div>
+    </div>
 </body>
 </html>
