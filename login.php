@@ -35,12 +35,6 @@ ob_start();
           $pasword = $_REQUEST['pass'] ?? '';
           $pasword = md5($pasword);
 
-
-          // require_once "./base-de-datos/abrir_conexion.php";
-          // $query = "SELECT id,email,nombre,rol from usuarios where email='" . $email . "' and pass='" . $pasword . "';  ";
-          // $res = mysqli_query($conexion, $query);
-          // $row = mysqli_fetch_assoc($res);
-
           include_once("./clases/Usuarios.php");
           $usuario = new Usuarios();
           $row = $usuario->get_usuario($email, $pasword);
@@ -81,8 +75,40 @@ ob_start();
             </div>
           </div>
           <div class="row">
-            <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block" name="login">Sign In</button>
+            <center>
+
+              <button type="submit" class="btn btn-primary btn-block " name="login">Sign In</button>
+            </center>
+
+          </div>
+        </form>
+
+        <hr />
+        <p class="login-box-msg">O</p>
+        <hr />
+        <p class="login-box-msg">Registrate en nuestro sistema</p>
+
+
+        <form method="POST" action="login.php">
+          <div class="container">
+            <div class="row align-items-start">
+              <div class="col">
+                <div class="mb-3">
+                  <p><input type="text" name="id" class="form-control w-100" required placeholder="ID de usuario"></p>
+                </div>
+                <div class="mb-3">
+                  <p><input type="text" name="nombre" class="form-control w-100" placeholder="Nombre"></p>
+                </div>
+                <div class="mb-3">
+                  <p><input type="password" name="pass" class="form-control w-100" placeholder="Contraseña"></p>
+                </div>
+                <div class="mb-3">
+                  <p><input type="text" name="correo" class="form-control w-100" placeholder="Correo"></p>
+                </div>
+              </div>
+              <center>
+                <input type="submit" value="Crear" name="btn_registrar" class="btn btn-primary">
+              </center>
             </div>
           </div>
         </form>
@@ -92,6 +118,26 @@ ob_start();
 </body>
 
 </html>
+<?php
+			if (isset($_POST['btn_registrar'])) {
+
+				$id = $_POST['id'];
+				$nombre = $_POST['nombre'];
+				$correo = $_POST['correo'];
+				$pass = md5($_POST['pass']);
+
+				if ($id == "") {
+					echo "El campo ID es obligatorio";
+				} else {
+					include_once("./clases/Usuarios.php");
+					$usuario = new Usuarios();
+					$conexion = $usuario->get_conexion();
+					mysqli_query($conexion, "INSERT INTO usuarios (id,email,pass,nombre,rol) values ('$id','$correo','$pass','$nombre','cliente')");
+					echo "Usuario almacenado";
+				}
+			}
+?>
+
 <?php
 ob_end_flush();
 ?>

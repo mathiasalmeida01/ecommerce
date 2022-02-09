@@ -1,4 +1,7 @@
 <?php
+ob_start();
+?>
+<?php
 include_once "./funciones/index.php";
 $productos = obtenerProductosEnCarrito();
 if (count($productos) <= 0) {
@@ -58,8 +61,12 @@ if (count($productos) <= 0) {
           </tr>
         </tfoot>
       </table>
-      <a href="./funciones/terminar_compra.php" class="btn btn-success d-block"><i class="fa fa-check"></i>&nbsp;Terminar compra</a>
+      <form action="./ecommerce.php" method="post">
+        <button type="submit" class="btn btn-success d-block w-100" name="comprar"><i class="fa fa-check"></i>&nbsp;Terminar compra</button>
+      </form>
     </div>
   </section>
 <?php } ?>
-<?php include_once "contacto.php" ?>
+<?php
+ob_end_flush();
+?>

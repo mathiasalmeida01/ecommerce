@@ -30,9 +30,6 @@
             <a class="nav-link" href="#carrito">Carrito</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <a class="btn btn-success" href="login.php">Login</a>
-        </form>
       </div>
     </div>
   </nav>

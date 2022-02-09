@@ -4,6 +4,9 @@ include_once("./clases/Productos.php");
 include_once "./funciones/index.php";
 $productos = new Productos();
 $array_productos = $productos->get_productos();
+if (isset($_REQUEST['comprar'])) {
+  echo '<script>alert("Compra realizada exitosamente!")</script>';
+}
 ?>
 <section id="productos" class="pt-4">
   <h2 class="text-center text-white pt-4">LISTA DE PRODUCTOS</h2>
